@@ -1,14 +1,18 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+
+import json
 
 import random
 # Create your views here.
 
 def home(request):
     rand = random.randint(0, 2)
+    jsonObj = {}
     if rand == 0 :
-        return HttpResponse("Race was pretty bad")
+        jsonObj['evaluation'] = "Race was pretty bad"
     elif rand == 1:
-        return HttpResponse("Race was ok")
+        jsonObj['evaluation'] = "Race was ok"
     else:
-        return HttpResponse("Literally the greatest instance of going around the funny circle ever")
+        jsonObj['evaluation'] = "Literally the greatest instance of going around the funny circle ever"
+    return JsonResponse(jsonObj)
