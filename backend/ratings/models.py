@@ -21,8 +21,14 @@ class Race(models.Model):
     race_number = models.IntegerField() # This is just like 'this is the 4th race in the season' 
 
 class Rating(models.Model):
-    pk = models.CompositePrimaryKey("user", "race")
+    # pk = models.CompositePrimaryKey("user", "race")
+    id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     race = models.ForeignKey(Race, on_delete=models.DO_NOTHING)
     score = models.IntegerField()
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'race'], name='rating-user_relation'),
+        ]
     
