@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('rating', view=views.home),
     path('user_check', view=views.user_data),
-    path('add_user', view=views.add_user)
+    path('add_user', view=views.add_user),
 ]

@@ -1,8 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
 import sqlite3
-
-import json
+from django.http import HttpResponse, JsonResponse
+from django.middleware.csrf import get_token
+from rest_framework.decorators import api_view
 
 import random
 # Create your views here.
@@ -28,17 +27,25 @@ def user_data(request):
     outputs = c.fetchall()
     return HttpResponse(outputs)
 
+@api_view(["POST"])
 def add_user(request):
+    get_token(request)
+
     conn = sqlite3.connect('db.sqlite3')
     c = conn.cursor() # cursor
 
     insert_layout = "INSERT INTO ratings_user (Username, Password) " \
                      "VALUES (?, ?);"
+    
+    print(request.body)
+    print(request.POST)
 
-    name = "hardcoded example rn"
-    pwd = "hardcoded example pwd"
 
-    inputs = (name, pwd)
+    name = request.POST['name']
+    password = request.POST['password']
+
+
+    inputs = (name, password)
 
     try:
         c.execute(insert_layout, inputs)
