@@ -27,8 +27,8 @@ class Race(models.Model):
     season = models.ForeignKey(Season, on_delete=models.DO_NOTHING)
     track = models.ForeignKey(Track, on_delete=models.DO_NOTHING)
     date = models.DateField()
-    race_number = models.IntegerField() # This is just like 'this is the 4th race in the season' 
-    number_of_laps = models.IntegerField()
+    race_number = models.IntegerField(null=True) # This is just like 'this is the 4th race in the season' 
+    number_of_laps = models.IntegerField(null=True)
     drivers = models.ManyToManyField(Driver)
     race_type = models.ForeignKey(Type_of_race, on_delete=models.DO_NOTHING) 
 
