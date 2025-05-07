@@ -24,4 +24,5 @@ urlpatterns = [
     path('rating', view=views.home),
     path('user_check', view=views.user_data),
     path('add_user', view=views.add_user),
+    path('auth_user', view=views.authenticate_user),
 ]
